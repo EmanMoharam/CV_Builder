@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CV_Builder</string>
+    <string name="Second_name">Personal information</string>
+    <string name="Third_name">Education</string>
+    <string name="Forth_name">Skills</string>
+    <string name="result">YOUR CV</string>
+
+    <string-array name="Gender_spinner_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="Level_spinner_array">
+        <item>Beginner</item>
+        <item>Intermediate</item>
+        <item>Advanced</item>
+    </string-array>
+</resources>

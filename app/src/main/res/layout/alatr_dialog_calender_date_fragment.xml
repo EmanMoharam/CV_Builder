@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+<Button
+    android:id="@+id/set_buttom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="SET"
+    android:textColor="#ffff"
+    android:background="@color/colorAccent"
+   />
+            <CalendarView
+                android:id="@+id/start_date_cal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:firstDayOfWeek="2"
+                android:maxDate="01/01/2025"
+                android:minDate="01/01/2000"
+                >
+
+            </CalendarView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
