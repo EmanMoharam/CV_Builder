@@ -64,15 +64,20 @@ public class Education_fragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 FragmentManager fr_manager = getFragmentManager();
+                if(!Name_UNIV_editText.getText().toString().isEmpty()) {
 
                     Education_fragment education_fragment = new Education_fragment();
                     FragmentTransaction frag_trans = fr_manager.beginTransaction();
                     frag_trans.add(R.id.container_of_addFRAG, education_fragment, "frag_tage");
                     frag_trans.commit();
                 add_edu_frag.setVisibility(View.GONE);
-                eduction_nams.add(Name_UNIV_editText.getText()+"");
+                    eduction_nams.add(Name_UNIV_editText.getText() + "");
+
+                }else{
+                    Toast.makeText(getActivity(), " there is an empity field", Toast.LENGTH_SHORT).show();
 
 
+                }
 
 
             }
@@ -81,7 +86,11 @@ public class Education_fragment extends Fragment  {
     }
 
     public String getlastElement(){
-        return   Name_UNIV_editText.getText()+"";
+        if(!Name_UNIV_editText.getText().toString().isEmpty()) {
+            return Name_UNIV_editText.getText() + "";
+        }else{
+            return "n/f";
+        }
     }
     public ArrayList<String> getArrayEdue(){
         return   eduction_nams;

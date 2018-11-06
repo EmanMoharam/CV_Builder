@@ -50,6 +50,7 @@ public class skills_fragment extends Fragment implements AdapterView.OnItemSelec
         add_skill_frag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!skill_name_editText.getText().toString().isEmpty()) {
                 FragmentManager fr_manager = getFragmentManager();
 
                 skills_fragment skills_fragment = new skills_fragment();
@@ -58,7 +59,13 @@ public class skills_fragment extends Fragment implements AdapterView.OnItemSelec
                 frag_trans.commit();
 
                 add_skill_frag.setVisibility(View.GONE);
-                skills_nams.add(skill_name_editText.getText()+"");
+
+                    skills_nams.add(skill_name_editText.getText()+"");
+
+                }else{
+                    Toast.makeText(getActivity(), " there is an empity field", Toast.LENGTH_SHORT).show();
+
+                }
                 skills_level.add(chosen_level);
 //                Toast.makeText(getActivity(), skills_nams.size()+" ------ onClick--- "+skills_level.size(), Toast.LENGTH_SHORT).show();
 
@@ -79,7 +86,11 @@ public class skills_fragment extends Fragment implements AdapterView.OnItemSelec
 
 
     public String getlastNameElement(){
-        return   skill_name_editText.getText()+"";
+        if(!skill_name_editText.getText().toString().isEmpty()) {
+            return skill_name_editText.getText() + "";
+        }else{
+            return "n/f";
+        }
     }
     public String getlastLevelElement(){
         return   chosen_level;

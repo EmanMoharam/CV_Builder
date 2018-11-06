@@ -18,6 +18,7 @@ public class Personal_Information extends AppCompatActivity implements AdapterVi
     ArrayAdapter<CharSequence> adapter;
     String name, email, phone, address, gender;
     EditText name_editText, email_editText, phone_editText, address_editText, age_editText;
+    boolean stop = false;
 
     int age;
 
@@ -42,18 +43,19 @@ public class Personal_Information extends AppCompatActivity implements AdapterVi
     }
 
     public void saveAndnext(View view) {
-        Intent i = new Intent(Personal_Information.this, Education.class);
         getText_from_editText();
+        if (stop) {
+            Intent i = new Intent(Personal_Information.this, Education.class);
 
-        create_shered_pref_prsonal(name, email, phone, address, age, gender);
+            create_shered_pref_prsonal(name, email, phone, address, age, gender);
 //        load_shered_pref_prsonal_data();
-        startActivity(i);
-
+            startActivity(i);
+        }
     }
 
     public void create_shered_pref_prsonal(String name, String email, String phone, String address, int age, String gender) {
 
-        SharedPreferences sharedPreferences_personal = getSharedPreferences(getPackageName()+"personal_sheredPref", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences_personal = getSharedPreferences(getPackageName() + "personal_sheredPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences_personal.edit();
         editor.putString("Name", name);
         editor.putString("Email", email);
@@ -66,18 +68,23 @@ public class Personal_Information extends AppCompatActivity implements AdapterVi
     }
 
     public void getText_from_editText() {
-        name = name_editText.getText() + "";
-        email = email_editText.getText() + "";
-        phone = phone_editText.getText() + "";
-        address = address_editText.getText() + "";
-        age = Integer.parseInt(age_editText.getText() + "");
+        if (!(name_editText.getText().toString().isEmpty() || email_editText.getText().toString().isEmpty() || phone_editText.getText().toString().isEmpty() || address_editText.getText().toString().isEmpty() || age_editText.getText().toString().isEmpty())) {
+            name = name_editText.getText() + "";
+            email = email_editText.getText() + "";
+            phone = phone_editText.getText() + "";
+            address = address_editText.getText() + "";
+            age = Integer.parseInt(age_editText.getText() + "");
+            stop = true;
+        } else {
+            Toast.makeText(this, " there is an empity field", Toast.LENGTH_SHORT).show();
 
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        gender= (String) parent.getItemAtPosition(position);
+        gender = (String) parent.getItemAtPosition(position);
 
     }
 
@@ -85,17 +92,18 @@ public class Personal_Information extends AppCompatActivity implements AdapterVi
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-    public void load_shered_pref_prsonal_data(){
-        SharedPreferences sharedPreferences_personal = getSharedPreferences(getPackageName()+"personal_sheredPref", Context.MODE_PRIVATE);
-        String Name=sharedPreferences_personal.getString("Name","#");
-        String Email=sharedPreferences_personal.getString("Email","#");
-        String Phone=sharedPreferences_personal.getString("Phone","#");
-        String Address=sharedPreferences_personal.getString("Address","#");
-        int Age=sharedPreferences_personal.getInt("Age",-1);
-        String Gender=sharedPreferences_personal.getString("Gender","#");
 
-        Toast.makeText(this, Name+" , "+Email+" , "+Phone+" , "+Address+" , "+Age+" , "+Gender, Toast.LENGTH_SHORT).show();
-        Log.i("Personal_Information",Name+" , "+Email+" , "+Phone+" , "+Address+" , "+Age+" , "+Gender +"  *************");
+    public void load_shered_pref_prsonal_data() {
+        SharedPreferences sharedPreferences_personal = getSharedPreferences(getPackageName() + "personal_sheredPref", Context.MODE_PRIVATE);
+        String Name = sharedPreferences_personal.getString("Name", "#");
+        String Email = sharedPreferences_personal.getString("Email", "#");
+        String Phone = sharedPreferences_personal.getString("Phone", "#");
+        String Address = sharedPreferences_personal.getString("Address", "#");
+        int Age = sharedPreferences_personal.getInt("Age", -1);
+        String Gender = sharedPreferences_personal.getString("Gender", "#");
+
+        Toast.makeText(this, Name + " , " + Email + " , " + Phone + " , " + Address + " , " + Age + " , " + Gender, Toast.LENGTH_SHORT).show();
+        Log.i("Personal_Information", Name + " , " + Email + " , " + Phone + " , " + Address + " , " + Age + " , " + Gender + "  *************");
 
     }
 }

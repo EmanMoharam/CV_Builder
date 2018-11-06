@@ -34,8 +34,19 @@ public class Education extends AppCompatActivity {
                 Education_fragment education_fragment = (Education_fragment) fr_manager.findFragmentById(R.id.fragment1_container);
                 eduction_nams = education_fragment.getArrayEdue();
                 Education_fragment education_lastfragment = (Education_fragment) fr_manager.findFragmentByTag("frag_tage");
+                boolean stop = false;
                 if (education_lastfragment != null) {
-                    eduction_nams.add(education_lastfragment.getlastElement());
+                    if (!education_lastfragment.getlastElement().equals("n/f")) {
+
+                        eduction_nams.add(education_lastfragment.getlastElement());
+                        stop = true;
+                    }
+                } else {
+                    if (!education_fragment.getlastElement().equals("n/f")) {
+
+                        eduction_nams.add(education_fragment.getlastElement());
+                        stop = true;
+                    }
                 }
                 education_object education_object = new education_object();
                 education_object.setEduction_nams(eduction_nams);
@@ -44,9 +55,10 @@ public class Education extends AppCompatActivity {
                 String gsonArrayString = gson.toJson(education_object);
                 creat_shered_pre_for_education(gsonArrayString);
 //                Toast.makeText(Education.this, eduction_nams.size() + " ------ " + gsonArrayString, Toast.LENGTH_SHORT).show();
-
-                Intent i = new Intent(Education.this, Skills.class);
-                startActivity(i);
+                if (stop) {
+                    Intent i = new Intent(Education.this, Skills.class);
+                    startActivity(i);
+                }
             }
         });
     }

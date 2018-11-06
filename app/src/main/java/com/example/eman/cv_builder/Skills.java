@@ -30,9 +30,22 @@ public class Skills extends AppCompatActivity {
         skills_nams = skills_fragment.getArrayskills_nams();
         skills_level = skills_fragment.getArrayskills_level();
         skills_fragment skills_lastfragment = (skills_fragment) fr_manager.findFragmentByTag("frag_tage");
+        boolean stop = false;
+
         if (skills_lastfragment != null) {
-            skills_nams.add(skills_lastfragment.getlastNameElement());
-            skills_level.add(skills_lastfragment.getlastLevelElement());
+            if (!skills_lastfragment.getlastNameElement().equals("n/f")) {
+                skills_nams.add(skills_lastfragment.getlastNameElement());
+                skills_level.add(skills_lastfragment.getlastLevelElement());
+
+                stop = true;
+            }
+        } else {
+            if (!skills_fragment.getlastNameElement().equals("n/f")) {
+
+                skills_nams.add(skills_fragment.getlastNameElement());
+                skills_level.add(skills_fragment.getlastLevelElement());
+                stop = true;
+            }
         }
         skill_object skill_object = new skill_object();
         skill_object.setSkills_nams(skills_nams);
@@ -42,9 +55,10 @@ public class Skills extends AppCompatActivity {
         String gsonArrayString = gson.toJson(skill_object);
         creat_shered_pre_for_skills(gsonArrayString);
 //        Toast.makeText(Skills.this, gsonArrayString+ " ------ saveAndnext---------- ", Toast.LENGTH_SHORT).show();
-
-        Intent i = new Intent(Skills.this, Final_Result.class);
-        startActivity(i);
+        if (stop) {
+            Intent i = new Intent(Skills.this, Final_Result.class);
+            startActivity(i);
+        }
     }
 
     public void creat_shered_pre_for_skills(String json_string) {
